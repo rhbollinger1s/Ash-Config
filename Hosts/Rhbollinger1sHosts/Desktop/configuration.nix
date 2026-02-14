@@ -132,6 +132,7 @@ xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   obsidian
   thunderbird
   zathura
+  kdePackages.kdenlive
 
   # Core CLI Utilities
   curl
