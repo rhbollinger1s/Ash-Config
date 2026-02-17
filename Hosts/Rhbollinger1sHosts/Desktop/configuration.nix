@@ -1,4 +1,10 @@
 { config, pkgs, ... }:
+# rhbollinger1s, 2025
+# "If I spend 1,000 years writing 10,000 comments,
+# then I will have wasted my life.
+# However, if one man reads one of my comments,
+# he will have wasted his time too,
+# and it will all have been worth it."
 
 {
 
@@ -24,7 +30,7 @@
   boot.kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
 
 # ----- [ HOSTNAME ] ------------------------------
-  networking.hostName = "jetBlack";
+  networking.hostName = "PaleKing";
 
 # ----- [ NETWORKING AND WIFI ] ------------------------------
   networking.networkmanager.enable = true;

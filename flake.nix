@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -48,7 +48,7 @@
       specialArgs = { inherit nixpkgs-unstable home-manager; };
     };
 
-    nixosConfigurations.JetBlack = nixpkgs-unstable.lib.nixosSystem {
+    nixosConfigurations.PaleKing = nixpkgs-unstable.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         home-manager.nixosModules.default
@@ -56,6 +56,15 @@
       ];
       specialArgs = { inherit nixpkgs-unstable home-manager; };
     };
+
+     nixosConfigurations.TheHollowKnight = nixpkgs-unstable.lib.nixosSystem {
+       system = "x86_64-linux";
+       modules = [
+         home-manager.nixosModules.default
+         ./Hosts/Rhbollinger1sHosts/Laptop/configuration.nix
+       ];
+       specialArgs = { inherit nixpkgs-unstable home-manager; };
+     };
 
     # Boilerplate for adding new hosts
     # nixosConfigurations.HOSTNAME = nixpkgs-unstable.lib.nixosSystem {
