@@ -14,7 +14,7 @@
         hyprpaper
         wofi
         grim
-        slupr
+        slurp
         wl-copy
   ];
 }

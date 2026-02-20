@@ -13,7 +13,7 @@
       ../../../Modules/Kernels/LatestKernel.nix
       ../../../Modules/Audio/PipeWire.nix
       ../../../Modules/Bootloaders/SystemDBoot.nix
-      ../../../Modules/Desktop/Hyprland.nix
+      ../../../Modules/Desktop/i3.nix
       ../../../Modules/DisplayManager/LY.nix
     ];
 
