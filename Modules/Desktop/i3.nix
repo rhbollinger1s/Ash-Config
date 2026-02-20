@@ -1,8 +1,7 @@
 { config, pkgs, ... }: {
 # ----- [ i3 ] ------------------------------
     imports = [ ];
-      environment.pathsToLink = [ "/libexec" ];
-  ...
+    environment.pathsToLink = [ "/libexec" ];
   services.xserver = {
     enable = true;
 
