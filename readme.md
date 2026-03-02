@@ -70,7 +70,7 @@ readme.md
 ```
 
 ## Usage
-First, follow the installation guide. Note that in the Hosts directory, there are 3 subfolders. TemplateHosts are supposed to be copied or tested from. Local is where you put your own custom configs. Rhbollinger1sHosts are the configs for the author's hosts, here for your reference. You build from the flake, telling it your hostname. It looks for your host's config file, which pulls in the modules you need, any per-host settings like hostname or locales, and pulls in modules you need.
+First, follow the installation guide. Note that in the Hosts directory, there are 3 subfolders. TemplateHosts are supposed to be copied or tested from. Local is where you put your own custom configs. Rhbollinger1sHosts are the configs for the author's hosts, here for your reference. You build from the flake, telling it your hostname. It looks for your host's config file, which pulls in the modules you need, any per-host settings like hostname or locales, and pulls in modules you need. Note that no modules ever have options, ever. 
 
 ## Contributing
 Contributions welcome! When adding modules:
@@ -78,6 +78,7 @@ Contributions welcome! When adding modules:
 - Test thoroughly before submitting
 - Never commit files from `./Hosts/Local/` (user-specific configs)
 - Submit PRs against the `main` branch
+- Never add options to your module, just make two modules. I want anyone to be able to understand the code.
 
 ## AI Policy
 ### What AI may not be used for:
@@ -92,3 +93,4 @@ Contributions welcome! When adding modules:
 
 ## Licensing
 "This project is under the Apache 2.0 license."
+
