@@ -12,11 +12,20 @@
       ./hardware-configuration.nix
       ../../../Modules/Kernels/LatestKernel.nix
       ../../../Modules/Audio/PipeWire.nix
-      ../../../Modules/Bootloaders/SystemDBoot.nix
-      ../../../Modules/Desktop/i3.nix
-      ../../../Modules/DisplayManager/LY.nix
+      ../../../Modules/Bootloaders/Grub.nix
+     # ../../../Modules/Desktop/i3.nix
+     # ../../../Modules/DisplayManager/LY.nix
     ];
-
+specialisation = {
+  hyprland.configuration = {
+    imports = [ ../../../Modules/Desktop/Hyprland.nix ];
+    system.nixos.tags = [ "Hyprland" ];
+  };
+  i3.configuration = {
+    imports = [ ../../../Modules/Desktop/i3.nix ];
+    system.nixos.tags = [ "i3wm" ];
+  };
+};
 # ----- [ HOSTNAME ] ------------------------------
   networking.hostName = "TheHollowKnight";
 
@@ -87,6 +96,8 @@
   usbutils
   keepassxc
   wine
+  i3-auto-layout
+  kdePackages.falkon
   ];
   programs.starship.enable = true;
   programs.steam = {
@@ -107,6 +118,10 @@
   security.rtkit.enable = true;
   services.fwupd.enable = true;
   services.power-profiles-daemon.enable = true;
+  networking.networkmanager.enable = true;
+  services.xserver.autorun = false;
+  services.xserver.displayManager.startx.enable = true;
+  services.displayManager.defaultSession = "none+i3";
 
 # ----- [ FIREWALL ] ------------------------------
   networking.firewall.allowedTCPPorts = [ 22 80 443 ];
