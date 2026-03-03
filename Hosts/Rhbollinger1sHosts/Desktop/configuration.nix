@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 # rhbollinger1s, 2025
 # "If I spend 1,000 years writing 10,000 comments,
 # then I will have wasted my life.
@@ -12,22 +12,33 @@
     [
       ./hardware-configuration.nix
       ../../../Modules/Packages/Kits/VMKit.nix
+      ../../../Modules/Drivers/GPU/Nivida/NividaOldDriver.nix
+      ../../../Modules/Audio/PipeWire.nix
+      ../../../Modules/LightDM.nix
+      ../../../Modules/DevKit.nix
+      ../../../Modules/Bootloaders/SystemDBoot.nix
+
     ];
+
+specialisation = {
+    i3-variant.configuration = {
+      imports = [ ../../../Modules/Desktop/i3.nix ];
+      system.nixos.tags = [ "i3" ];
+    };
+    cinnamon-variant.configuration = {
+      imports = [ ../../../Modules/Desktop/Cinnamon.nix ];
+      system.nixos.tags = [ "cinnamon" ];
+    };
+  };
 
 # ----- [ X11 ] ------------------------------
   services = {
     xserver.enable = true; # Enables X11
-    xserver.videoDrivers = [ "nvidia" ];
    };
-
-# ----- [ BOOTLOADER ] ------------------------------
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
 # ----- [ KERNEL and FIRMWARE ] ------------------------------
   boot.kernelPackages = pkgs.linuxPackages_6_12;
   hardware.firmware = [ pkgs.linux-firmware ];
-  boot.kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
 
 # ----- [ HOSTNAME ] ------------------------------
   networking.hostName = "PaleKing";
@@ -49,25 +60,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-# ----- [ DISPLAY MANAGER ] ------------------------------
- services.xserver.displayManager.lightdm.enable = true;
-
-# ----- [ DESKTOP ] ------------------------------
-  services.xserver.desktopManager.cinnamon.enable = true;
-
-# ----- [ DRIVER CONFIG ] ------------------------------
-hardware.graphics.enable = true;
-hardware.nvidia = {
-  modesetting.enable = true;
-  nvidiaSettings = true;
-  package = config.boot.kernelPackages.nvidiaPackages.stable;
-  open = false;
-};
-
-# ----- [ XDG PORTALS ] ------------------------------
-xdg.portal.enable = true;
-xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
 # ----- [ SUID WRAPPERS ] ------------------------------
   programs.mtr.enable = true;
@@ -232,16 +224,6 @@ xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # rtkit enabled
   security.rtkit.enable = true;
-
-  # audio setup
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
-  };
 
   services.openssh.enable = true;
 
